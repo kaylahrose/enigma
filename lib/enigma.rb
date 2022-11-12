@@ -4,19 +4,22 @@ class Enigma
   # attr_reader :keys
 
   def encrypt(msg, key_num, date)
-    e = { encryption: '',
+    @e = { encryption: '',
           key: key_num,
           date: date }
     key = Key.new(key_num)
     offset = Offset.new(date)
     shift = Shift.new(key, offset)
+    new_char(msg, shift)
+    @e
+  end
+
+  def new_char(msg, shift)
     msg.each_char.with_index do |char, index|
-      char_shift = assoc_shift(index, shift)
-      new_index = characters.index(char) + char_shift
+      new_index = characters.index(char) + assoc_shift(index, shift)
       new_index -= 27 while new_index > 26
-      e[:encryption] << characters[new_index]
+      @e[:encryption] << characters[new_index]
     end
-    e
   end
 
   def characters
