@@ -56,4 +56,12 @@ RSpec.describe Enigma do
 
     expect(no_date).to eq(with_date)
   end
+
+  it "#decrypt a message with a key (uses today's date)" do
+    enigma = Enigma.new
+
+    encrypted = enigma.encrypt('hello world', '02715')
+    no_date = enigma.decrypt(encrypted[:encryption], '02715')
+    expect(no_date[:decryption]).to eq('hello world')
+  end
 end
