@@ -30,7 +30,7 @@ RSpec.describe Enigma do
     expect(enigma.assoc_shift(9, shift)).to eq(shift.b_shift)
   end
 
-  it '#encrypt a message with key and date' do
+  xit '#encrypt a message with key and date' do
     enigma = Enigma.new
     expect(enigma.encrypt('hello world', '02715', '040895')).to eq({
                                                                      encryption: 'keder ohulw',
@@ -48,4 +48,15 @@ RSpec.describe Enigma do
                                                                      date: '040895'
                                                                    })
   end
+
+  it '#encrypt a message with a key (uses todays date)' do
+  enigma = Enigma.new
+  # offset = 8884
+  # shift = 10, 35, 79, 19
+  expect(encrypted = enigma.encrypt("hello world", "02715")).to eq({
+    encryption: 'hello world',
+    key: '02715',
+    date: '121122'
+  })
+end
 end

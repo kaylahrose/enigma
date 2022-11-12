@@ -1,9 +1,11 @@
 require_relative 'key'
+require 'date'
 
 class Enigma
   # attr_reader :keys
 
-  def encrypt(msg, key_num, date)
+  def encrypt(msg, key_num, date = (Date.today).strftime('%d%m%y'))
+    require 'pry'; binding.pry
     @e = { encryption: '',
            key: key_num,
            date: date }
@@ -16,6 +18,7 @@ class Enigma
 
   def new_char(msg, shift)
     msg.each_char.with_index do |char, index|
+      require 'pry'; binding.pry
       new_index = characters.index(char) + assoc_shift(index, shift)
       new_index -= 27 while new_index > 26
       @e[:encryption] << characters[new_index]
