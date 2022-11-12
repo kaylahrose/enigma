@@ -48,4 +48,40 @@ RSpec.describe Enigma do
                                                                      date: '040895'
                                                                    })
   end
+
+  it '#encrypt a message with a key (uses todays date)' do
+    enigma = Enigma.new
+    no_date = enigma.encrypt('hello world', '02715')
+    with_date = enigma.encrypt('hello world', '02715', Date.today.strftime('%d%m%y'))
+
+    expect(no_date).to eq(with_date)
+  end
+
+  it "#decrypt a message with a key (uses today's date)" do
+    enigma = Enigma.new
+
+    encrypted = enigma.encrypt('hello world', '02715')
+    no_date = enigma.decrypt(encrypted[:encryption], '02715')
+    expect(no_date[:decryption]).to eq('hello world')
+  end
+
+  it 'generates random key with leading 0s' do
+    enigma = Enigma.new
+    
+    expect(enigma.random_key).to be_a(String)
+    expect(enigma.random_key.length).to eq(5)
+    expect((0..99999) === enigma.random_key.to_i).to eq(true)
+  end
+
+
+  it '#encrypt a message (generates random key and uses todays date)' do
+  enigma = Enigma.new
+  # allow(enigma).to receive(:random_key).and_return('01234')
+  # expect(enigma.random_key
+  encrypt_no_key = enigma.encrypt('hello world')
+  # encrypt_with_key = enigma.encrypt('hello world', '01234')
+  expect(encrypt_no_key[:key]).to be_a(String)
+  expect(encrypt_no_key[:key].length).to eq(5)
+  expect((0..99999) === encrypt_no_key[:key].to_i).to eq(true)
+  end
 end
