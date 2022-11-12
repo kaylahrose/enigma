@@ -76,7 +76,12 @@ RSpec.describe Enigma do
 
   it '#encrypt a message (generates random key and uses todays date)' do
   enigma = Enigma.new
-  allow(enigma).to receive(:random_key).and_return('12345')
-  # expect(enigma.random_key)
+  # allow(enigma).to receive(:random_key).and_return('01234')
+  # expect(enigma.random_key
+  encrypt_no_key = enigma.encrypt('hello world')
+  # encrypt_with_key = enigma.encrypt('hello world', '01234')
+  expect(encrypt_no_key[:key]).to be_a(String)
+  expect(encrypt_no_key[:key].length).to eq(5)
+  expect((0..99999) === encrypt_no_key[:key].to_i).to eq(true)
   end
 end
