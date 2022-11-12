@@ -4,7 +4,7 @@ require 'date'
 class Enigma
   # attr_reader :keys
 
-  def encrypt(msg, key_num = rand(0..99999), date = (Date.today).strftime('%d%m%y'))
+  def encrypt(msg, key_num = random_key, date = (Date.today).strftime('%d%m%y'))
     @e = { encryption: '',
            key: key_num,
            date: date }
