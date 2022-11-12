@@ -1,4 +1,4 @@
-class Keys
+class Key
   attr_reader :a_key, :b_key, :c_key, :d_key
 
   def initialize(num)
