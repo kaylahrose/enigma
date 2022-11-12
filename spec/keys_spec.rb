@@ -5,19 +5,8 @@ RSpec.describe Keys do
     keys = Keys.new("02715")
     
     expect(keys.a_key).to eq('02')
+    expect(keys.b_key).to eq('27')
+    expect(keys.c_key).to eq('71')
+    expect(keys.d_key).to eq('15')
   end
-
-  xit '#sanitize' do
-  keys = Keys.new("02715")
-  expect(keys.sanitize("02")).to eq(02)
-
-end
-
-  xit '#random_num' do
-  keys = Keys.new
-#   expect(keys.random_num).to be_a
-
-
-
-end
 end

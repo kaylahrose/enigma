@@ -8,9 +8,20 @@ RSpec.describe Enigma do
   end
 
   it '#characters' do
-  enigma = Enigma.new
-  expect(enigma.characters).to eq(["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " "])
-end
+    enigma = Enigma.new
+    expect(enigma.characters).to eq(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',
+                                     'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' '])
+  end
+
+  it '#assoc_key' do
+    enigma = Enigma.new
+    key = Keys.new('02715')
+
+    expect(enigma.assoc_key(0, key)).to eq(key.a_key)
+
+
+    
+  end
 
   it '#encrypt a message' do
     enigma = Enigma.new
