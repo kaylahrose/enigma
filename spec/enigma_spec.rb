@@ -2,7 +2,6 @@ require './lib/enigma'
 require './lib/offset'
 require './lib/shift'
 
-
 RSpec.describe Enigma do
   it 'exists' do
     enigma = Enigma.new
@@ -29,16 +28,22 @@ RSpec.describe Enigma do
     expect(enigma.assoc_shift(3, shift)).to eq(shift.d_shift)
     expect(enigma.assoc_shift(4, shift)).to eq(shift.a_shift)
     expect(enigma.assoc_shift(9, shift)).to eq(shift.b_shift)
-
-
-
-    
   end
 
-  it '#encrypt a message' do
+  it '#encrypt a message with key and date' do
     enigma = Enigma.new
     expect(enigma.encrypt('hello world', '02715', '040895')).to eq({
                                                                      encryption: 'keder ohulw',
+                                                                     key: '02715',
+                                                                     date: '040895'
+                                                                   })
+  end
+
+  it '#decrypt a message with key and date' do
+    enigma = Enigma.new
+
+    expect(enigma.decrypt('keder ohulw', '02715', '040895')).to eq({
+                                                                     decryption: 'hello world',
                                                                      key: '02715',
                                                                      date: '040895'
                                                                    })
