@@ -4,7 +4,7 @@ require 'date'
 class Enigma
   # attr_reader :keys
 
-  def encrypt(msg, key_num, date = (Date.today).strftime('%d%m%y'))
+  def encrypt(msg, key_num = rand(0..99999), date = (Date.today).strftime('%d%m%y'))
     @e = { encryption: '',
            key: key_num,
            date: date }
@@ -13,6 +13,15 @@ class Enigma
     shift = Shift.new(key, offset)
     new_char(msg, shift)
     @e
+  end
+
+  def random_key
+    # require 'pry'; binding.pry
+    n = rand(0..99999).to_s
+    while n.length < 5
+      n.insert(0, '0')
+    end
+    n
   end
 
   def new_char(msg, shift)
@@ -42,6 +51,7 @@ class Enigma
   end
 
   def decrypt(msg, key_num, date = (Date.today).strftime('%d%m%y'))
+    # TODO refactor 
     @d = { decryption: '',
            key: key_num,
            date: date }
