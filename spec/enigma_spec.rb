@@ -32,11 +32,23 @@ RSpec.describe Enigma do
 
   it '#encrypt a message with key and date' do
     enigma = Enigma.new
-    expect(enigma.encrypt('hello world', '02715', '040895')).to eq({
-                                                                     encryption: 'keder ohulw',
-                                                                     key: '02715',
-                                                                     date: '040895'
-                                                                   })
+    expected = {
+      encryption: 'keder ohulw',
+      key: '02715',
+      date: '040895'
+    }
+    expect(enigma.encrypt('hello world', '02715', '040895')).to eq(expected)
+    expect(enigma.encrypt('Hello World', '02715', '040895')).to eq(expected)
+    expect(enigma.encrypt('Hello World?', '02715', '040895')).to eq({
+      encryption: 'keder ohulw?',
+      key: '02715',
+      date: '040895'
+    })
+    expect(enigma.encrypt('He!!o World?', '02715', '040895')).to eq({
+      encryption: 'ke!!r ohulw?',
+      key: '02715',
+      date: '040895'
+    })
   end
 
   it '#decrypt a message with key and date' do
@@ -61,25 +73,32 @@ RSpec.describe Enigma do
     enigma = Enigma.new
     encrypted = enigma.encrypt('hello world', '02715')
     no_date = enigma.decrypt(encrypted[:encryption], '02715')
-    
+
     expect(no_date[:decryption]).to eq('hello world')
   end
 
   it 'generates random key with leading 0s' do
     enigma = Enigma.new
-    
+
     expect(enigma.random_key).to be_a(String)
     expect(enigma.random_key.length).to eq(5)
-    expect((0..99999) === enigma.random_key.to_i).to eq(true)
+    expect((0..99_999).include?(enigma.random_key.to_i)).to eq(true)
   end
 
-
   it '#encrypt a message (generates random key and uses todays date)' do
-  enigma = Enigma.new
-  encrypt_no_key = enigma.encrypt('hello world')
+    enigma = Enigma.new
+    encrypt_no_key = enigma.encrypt('hello world')
 
-  expect(encrypt_no_key[:key]).to be_a(String)
-  expect(encrypt_no_key[:key].length).to eq(5)
-  expect((0..99999) === encrypt_no_key[:key].to_i).to eq(true)
+    expect(encrypt_no_key[:key]).to be_a(String)
+    expect(encrypt_no_key[:key].length).to eq(5)
+    expect((0..99_999).include?(encrypt_no_key[:key].to_i)).to eq(true)
+  end
+
+  it '#encrypt a message with uppercase letters' do
+    enigma = Enigma.new
+    encryption_upcase = enigma.encrypt('Hello world', '02715', '040895')
+    encryption_downcase = enigma.encrypt('hello world', '02715', '040895')
+
+    expect(encryption_upcase).to eq(encryption_downcase)
   end
 end
