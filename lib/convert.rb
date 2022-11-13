@@ -9,25 +9,14 @@ module Convert
     Date.today.strftime('%d%m%y')
   end
 
-  def new_char(msg, shift)
+  def new_char(msg, shift,hash)
     msg.each_char.with_index do |char, index|
       if characters.index(char).nil?
-        @e[:encryption] << char
+        hash[hash.keys[0]] << char 
       else
-        new_index = shift_up(char, index, shift)
-        @e[:encryption] << characters[new_index]
-      end
-    end
-  end
-
-  def dnew_char(msg, shift)
-    msg.each_char.with_index do |char, index|
-      if characters.index(char).nil?
-        # require 'pry'; binding.pry
-        @d[:decryption] << char
-      else
-        new_index = shift_down(char, index, shift)
-        @d[:decryption] << characters[new_index]
+        new_index = shift_up(char, index, shift) if hash[:encryption]
+        new_index = shift_down(char, index, shift) if hash[:decryption]
+        hash[hash.keys[0]] << characters[new_index]
       end
     end
   end

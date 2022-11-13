@@ -13,21 +13,9 @@ class Enigma
     key = Key.new(key_num)
     offset = Offset.new(date)
     shift = Shift.new(key, offset)
-    new_char(msg.downcase, shift)
+    new_char(msg.downcase, shift, @e)
     @e
   end
-
-  # def new_char(msg, shift)
-  #   msg.each_char.with_index do |char, index|
-  #     if characters.index(char).nil?
-  #       @e[:encryption] << char
-  #     else
-  #       new_index = characters.index(char) + assoc_shift(index, shift)
-  #       new_index -= 27 while new_index > 26
-  #       @e[:encryption] << characters[new_index]
-  #     end
-  #   end
-  # end
 
   def characters
     ('a'..'z').to_a << ' '
@@ -54,15 +42,7 @@ class Enigma
     key = Key.new(key_num)
     offset = Offset.new(date)
     shift = Shift.new(key, offset)
-    dnew_char(msg, shift)
+    new_char(msg, shift, @d)
     @d
   end
-
-  # def dnew_char(msg, shift)
-  #   msg.each_char.with_index do |char, index|
-  #     new_index = characters.index(char) - assoc_shift(index, shift)
-  #     new_index += 27 while new_index < 0
-  #     @d[:decryption] << characters[new_index]
-  #   end
-  # end
 end
