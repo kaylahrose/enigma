@@ -5,6 +5,12 @@ module Convert
     n
   end
 
+  def make_shifts(key_num, date)
+    key = Key.new(key_num)
+    offset = Offset.new(date)
+    Shift.new(key, offset)
+  end
+
   def current_date
     Date.today.strftime('%d%m%y')
   end
