@@ -17,23 +17,17 @@ class Enigma
     @e
   end
 
-  # def random_key
-  #   n = rand(0..99_999).to_s
-  #   n.insert(0, '0') while n.length < 5
-  #   n
+  # def new_char(msg, shift)
+  #   msg.each_char.with_index do |char, index|
+  #     if characters.index(char).nil?
+  #       @e[:encryption] << char
+  #     else
+  #       new_index = characters.index(char) + assoc_shift(index, shift)
+  #       new_index -= 27 while new_index > 26
+  #       @e[:encryption] << characters[new_index]
+  #     end
+  #   end
   # end
-
-  def new_char(msg, shift)
-    msg.each_char.with_index do |char, index|
-      if characters.index(char).nil?
-        @e[:encryption] << char
-      else
-        new_index = characters.index(char) + assoc_shift(index, shift)
-        new_index -= 27 while new_index > 26
-        @e[:encryption] << characters[new_index]
-      end
-    end
-  end
 
   def characters
     ('a'..'z').to_a << ' '
