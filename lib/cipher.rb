@@ -1,17 +1,15 @@
 module Cipher
-  def cipher(msg)
-    msg.each_char.with_index do |char, index|
-      new_char(char, index)
+  def cipher(text)
+    text.each_char.with_index do |char, index|
+      char = new_char(char, index) if characters.index(char)
+      @hash[@hash.keys[0]] << char
     end
     @hash
   end
 
   def new_char(char, index)
-    if characters.index(char)
-      shifted_characters = shift(index)
-      char = shifted_characters[characters.index(char)]
-    end
-    @hash[@hash.keys[0]] << char
+    shifted_characters = shift(index)
+    shifted_characters[characters.index(char)]
   end
 
   def shift(index)
@@ -26,13 +24,14 @@ module Cipher
 
   def assoc_shift(index, shift)
     index -= 4 while index > 3
-    if index == 0
+    case index
+    when 0
       shift.a_shift
-    elsif index == 1
+    when 1
       shift.b_shift
-    elsif index == 2
+    when 2
       shift.c_shift
-    else
+    when 3
       shift.d_shift
     end
   end
