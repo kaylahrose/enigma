@@ -17,17 +17,20 @@ RSpec.describe Enigma do
 
   it '#assoc_shift' do
     enigma = Enigma.new
-    key = Key.new('02715')
-    offset = Offset.new('040895')
+    # key = Key.new('02715')
+    # offset = Offset.new('040895')
     # require 'pry'; binding.pry
-    shift = Shift.new(key, offset)
+    shift = enigma.make_shifts('02715','040895')
+    # @shift = Shift.new(key, offset)
+    # require 'pry'; binding.pry
+    # allow(enigma).to receive(:assoc_shift).and_return(3)
 
-    expect(enigma.assoc_shift(0, shift)).to eq(shift.a_shift)
-    expect(enigma.assoc_shift(1, shift)).to eq(shift.b_shift)
-    expect(enigma.assoc_shift(2, shift)).to eq(shift.c_shift)
-    expect(enigma.assoc_shift(3, shift)).to eq(shift.d_shift)
-    expect(enigma.assoc_shift(4, shift)).to eq(shift.a_shift)
-    expect(enigma.assoc_shift(9, shift)).to eq(shift.b_shift)
+    expect(enigma.assoc_shift(0, shift)).to eq(3)
+    expect(enigma.assoc_shift(1,shift)).to eq(27)
+    expect(enigma.assoc_shift(2,shift)).to eq(73)
+    expect(enigma.assoc_shift(3,shift)).to eq(20)
+    expect(enigma.assoc_shift(4,shift)).to eq(3)
+    expect(enigma.assoc_shift(9,shift)).to eq(27)
   end
 
   it '#encrypt a message with key and date' do

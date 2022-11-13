@@ -15,16 +15,33 @@ module Convert
     Date.today.strftime('%d%m%y')
   end
 
-  def new_char(msg, shift,hash)
+  def new_msg(msg)
     msg.each_char.with_index do |char, index|
-      if characters.index(char).nil?
-        hash[hash.keys[0]] << char 
-      else
-        new_index = shift_up(char, index, shift) if hash[:encryption]
-        new_index = shift_down(char, index, shift) if hash[:decryption]
-        hash[hash.keys[0]] << characters[new_index]
-      end
+        new_char(char, index)
+      #   if characters.index(char)
+      #     new_i = new_index(char,index)
+      #     @hash[@hash.keys[0]] << characters[new_i]
+      #   else
+      #     @hash[@hash.keys[0]] << char
+      #   end
     end
+    @hash
+  end
+
+  def new_char(char, index)
+    if characters.index(char)
+      new_i = new_index(char, index)
+      @hash[@hash.keys[0]] << characters[new_i]
+    else
+      @hash[@hash.keys[0]] << char
+    end
+  end
+
+  def new_index(char, index)
+    shift = make_shifts(@hash[:key], @hash[:date])
+    new_index = shift_up(char, index, shift) if @hash[:encryption]
+    new_index = shift_down(char, index, shift) if @hash[:decryption]
+    new_index
   end
 
   def shift_up(char, index, shift)
