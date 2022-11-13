@@ -8,7 +8,7 @@ require 'date'
 class Enigma
   include Convert
   include Default
-  
+
   def encrypt(msg, key_num = random_key, date = current_date)
     @hash = { encryption: '',
               key: key_num,
