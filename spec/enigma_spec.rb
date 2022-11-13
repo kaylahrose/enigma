@@ -40,15 +40,15 @@ RSpec.describe Enigma do
     expect(enigma.encrypt('hello world', '02715', '040895')).to eq(expected)
     expect(enigma.encrypt('Hello World', '02715', '040895')).to eq(expected)
     expect(enigma.encrypt('Hello World?', '02715', '040895')).to eq({
-      encryption: 'keder ohulw?',
-      key: '02715',
-      date: '040895'
-    })
+                                                                      encryption: 'keder ohulw?',
+                                                                      key: '02715',
+                                                                      date: '040895'
+                                                                    })
     expect(enigma.encrypt('He!!o World?', '02715', '040895')).to eq({
-      encryption: 'ke!!r ohulw?',
-      key: '02715',
-      date: '040895'
-    })
+                                                                      encryption: 'ke!!r ohulw?',
+                                                                      key: '02715',
+                                                                      date: '040895'
+                                                                    })
   end
 
   it '#decrypt a message with key and date' do
@@ -59,6 +59,12 @@ RSpec.describe Enigma do
                                                                      key: '02715',
                                                                      date: '040895'
                                                                    })
+    expect(enigma.decrypt('keder ohulw!', '02715',
+                          '040895')).to eq({
+                                             decryption: 'hello world',
+                                             key: '02715',
+                                             date: '040895'
+                                           })
   end
 
   it '#encrypt a message with a key (uses todays date)' do

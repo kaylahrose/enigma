@@ -22,8 +22,6 @@ module Convert
 
   def dnew_char(msg, _shift)
     msg.each_char.with_index do |_char, _index|
-      #   new_index = characters.index(char) - assoc_shift(index, shift)
-      #   new_index += 27 while new_index < 0
       @d[:decryption] << characters[new_index]
     end
   end
