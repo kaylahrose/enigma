@@ -3,19 +3,19 @@ require './lib/offset'
 require './lib/shift'
 
 RSpec.describe Enigma do
-  it 'exists' do
+  xit 'exists' do
     enigma = Enigma.new
 
     expect(enigma).to be_instance_of(Enigma)
   end
 
-  it '#characters' do
+  xit '#characters' do
     enigma = Enigma.new
     expect(enigma.characters).to eq(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',
                                      'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' '])
   end
 
-  it '#assoc_shift' do
+  xit '#assoc_shift' do
     enigma = Enigma.new
     key = Key.new('02715')
     offset = Offset.new('040895')
@@ -30,7 +30,7 @@ RSpec.describe Enigma do
     expect(enigma.assoc_shift(9, shift)).to eq(shift.b_shift)
   end
 
-  it '#encrypt a message with key and date' do
+  xit '#encrypt a message with key and date' do
     enigma = Enigma.new
     expect(enigma.encrypt('hello world', '02715', '040895')).to eq({
                                                                      encryption: 'keder ohulw',
@@ -39,7 +39,7 @@ RSpec.describe Enigma do
                                                                    })
   end
 
-  it '#decrypt a message with key and date' do
+  xit '#decrypt a message with key and date' do
     enigma = Enigma.new
 
     expect(enigma.decrypt('keder ohulw', '02715', '040895')).to eq({
@@ -49,7 +49,7 @@ RSpec.describe Enigma do
                                                                    })
   end
 
-  it '#encrypt a message with a key (uses todays date)' do
+  xit '#encrypt a message with a key (uses todays date)' do
     enigma = Enigma.new
     no_date = enigma.encrypt('hello world', '02715')
     with_date = enigma.encrypt('hello world', '02715', Date.today.strftime('%d%m%y'))
@@ -57,7 +57,7 @@ RSpec.describe Enigma do
     expect(no_date).to eq(with_date)
   end
 
-  it "#decrypt a message with a key (uses today's date)" do
+  xit "#decrypt a message with a key (uses today's date)" do
     enigma = Enigma.new
     encrypted = enigma.encrypt('hello world', '02715')
     no_date = enigma.decrypt(encrypted[:encryption], '02715')
@@ -65,7 +65,7 @@ RSpec.describe Enigma do
     expect(no_date[:decryption]).to eq('hello world')
   end
 
-  it 'generates random key with leading 0s' do
+  xit 'generates random key with leading 0s' do
     enigma = Enigma.new
 
     expect(enigma.random_key).to be_a(String)
@@ -73,7 +73,7 @@ RSpec.describe Enigma do
     expect((0..99_999).include?(enigma.random_key.to_i)).to eq(true)
   end
 
-  it '#encrypt a message (generates random key and uses todays date)' do
+  xit '#encrypt a message (generates random key and uses todays date)' do
     enigma = Enigma.new
     encrypt_no_key = enigma.encrypt('hello world')
 

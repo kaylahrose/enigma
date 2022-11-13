@@ -12,7 +12,7 @@ class Enigma
     key = Key.new(key_num)
     offset = Offset.new(date)
     shift = Shift.new(key, offset)
-    new_char(msg, shift)
+    new_char(msg.downcase, shift)
     @e
   end
 
@@ -26,7 +26,7 @@ class Enigma
 
   def new_char(msg, shift)
     msg.each_char.with_index do |char, index|
-      require 'pry'; binding.pry
+      # require 'pry'; binding.pry
       new_index = characters.index(char) + assoc_shift(index, shift)
       new_index -= 27 while new_index > 26
       @e[:encryption] << characters[new_index]
