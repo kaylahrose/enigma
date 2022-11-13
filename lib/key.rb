@@ -8,5 +8,5 @@ class Key
     @d_key = num[3..4].to_i
   end
 
-  def sanitize(num); end
+  # def sanitize(num); end
 end

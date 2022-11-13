@@ -23,11 +23,9 @@ class Enigma
 
   def new_char(msg, shift)
     msg.each_char.with_index do |char, index|
-      # require 'pry'; binding.pry
       if characters.index(char).nil?
         @e[:encryption] << char
       else
-
         new_index = characters.index(char) + assoc_shift(index, shift)
         new_index -= 27 while new_index > 26
         @e[:encryption] << characters[new_index]
