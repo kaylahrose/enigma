@@ -2,14 +2,17 @@ require_relative 'key'
 require_relative 'offset'
 require_relative 'shift'
 require_relative 'convert'
+require 'default'
 require 'date'
 
 class Enigma
   include Convert
+  include Default
+  
   def encrypt(msg, key_num = random_key, date = current_date)
     @hash = { encryption: '',
-           key: key_num,
-           date: date }
+              key: key_num,
+              date: date }
     new_msg(msg.downcase)
   end
 
@@ -17,7 +20,7 @@ class Enigma
     ('a'..'z').to_a << ' '
   end
 
-  def assoc_shift(index,shift)
+  def assoc_shift(index, shift)
     index -= 4 while index > 3
     if index == 0
       shift.a_shift
@@ -32,8 +35,8 @@ class Enigma
 
   def decrypt(msg, key_num, date = current_date)
     @hash = { decryption: '',
-           key: key_num,
-           date: date }
+              key: key_num,
+              date: date }
     new_msg(msg)
   end
 end

@@ -17,13 +17,7 @@ RSpec.describe Enigma do
 
   it '#assoc_shift' do
     enigma = Enigma.new
-    # key = Key.new('02715')
-    # offset = Offset.new('040895')
-    # require 'pry'; binding.pry
     shift = enigma.make_shifts('02715','040895')
-    # @shift = Shift.new(key, offset)
-    # require 'pry'; binding.pry
-    # allow(enigma).to receive(:assoc_shift).and_return(3)
 
     expect(enigma.assoc_shift(0, shift)).to eq(3)
     expect(enigma.assoc_shift(1,shift)).to eq(27)
