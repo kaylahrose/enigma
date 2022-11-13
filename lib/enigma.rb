@@ -10,10 +10,7 @@ class Enigma
     @e = { encryption: '',
            key: key_num,
            date: date }
-    shift = make_shifts(key_num,date)
-    # key = Key.new(key_num)
-    # offset = Offset.new(date)
-    # shift = Shift.new(key, offset)
+    shift = make_shifts(key_num, date)
     new_char(msg.downcase, shift, @e)
     @e
   end
@@ -40,9 +37,7 @@ class Enigma
     @d = { decryption: '',
            key: key_num,
            date: date }
-    key = Key.new(key_num)
-    offset = Offset.new(date)
-    shift = Shift.new(key, offset)
+    shift = make_shifts(key_num, date)
     new_char(msg, shift, @d)
     @d
   end
