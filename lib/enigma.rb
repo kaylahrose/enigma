@@ -9,30 +9,17 @@ class Enigma
   include Cipher
   include Default
 
-  def encrypt(msg, key_num = random_key, date = current_date)
+  def encrypt(text, key_num = random_key, date = current_date)
     @hash = { encryption: '',
               key: key_num,
               date: date }
-    cipher(msg.downcase)
+    cipher(text.downcase)
   end
 
-  # def assoc_shift(index, shift)
-  #   index -= 4 while index > 3
-  #   if index == 0
-  #     shift.a_shift
-  #   elsif index == 1
-  #     shift.b_shift
-  #   elsif index == 2
-  #     shift.c_shift
-  #   else
-  #     shift.d_shift
-  #   end
-  # end
-
-  def decrypt(msg, key_num, date = current_date)
+  def decrypt(text, key_num, date = current_date)
     @hash = { decryption: '',
               key: key_num,
               date: date }
-    cipher(msg)
+    cipher(text)
   end
 end

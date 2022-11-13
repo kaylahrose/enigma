@@ -1,7 +1,8 @@
 module Cipher
-  def cipher(msg)
-    msg.each_char.with_index do |char, index|
+  def cipher(text)
+    text.each_char.with_index do |char, index|
       new_char(char, index)
+      @hash[@hash.keys[0]] << new_char(char, index)
     end
     @hash
   end
@@ -11,7 +12,8 @@ module Cipher
       shifted_characters = shift(index)
       char = shifted_characters[characters.index(char)]
     end
-    @hash[@hash.keys[0]] << char
+    char
+    # @hash[@hash.keys[0]] << char
   end
 
   def shift(index)
