@@ -4,4 +4,8 @@ module Convert
     n.insert(0, '0') while n.length < 5
     n
   end
+
+  def current_date
+    Date.today.strftime('%d%m%y')
+  end
 end

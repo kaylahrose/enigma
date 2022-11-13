@@ -6,7 +6,7 @@ require 'date'
 
 class Enigma
   include Convert
-  def encrypt(msg, key_num = random_key, date = Date.today.strftime('%d%m%y'))
+  def encrypt(msg, key_num = random_key, date = current_date)
     @e = { encryption: '',
            key: key_num,
            date: date }
@@ -52,7 +52,7 @@ class Enigma
     end
   end
 
-  def decrypt(msg, key_num, date = Date.today.strftime('%d%m%y'))
+  def decrypt(msg, key_num, date = current_date)
     # TODO: refactor
     @d = { decryption: '',
            key: key_num,
