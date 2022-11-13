@@ -1,9 +1,11 @@
 require_relative 'key'
 require_relative 'offset'
 require_relative 'shift'
+require_relative 'convert'
 require 'date'
 
 class Enigma
+  include Convert
   def encrypt(msg, key_num = random_key, date = Date.today.strftime('%d%m%y'))
     @e = { encryption: '',
            key: key_num,
@@ -15,11 +17,11 @@ class Enigma
     @e
   end
 
-  def random_key
-    n = rand(0..99_999).to_s
-    n.insert(0, '0') while n.length < 5
-    n
-  end
+  # def random_key
+  #   n = rand(0..99_999).to_s
+  #   n.insert(0, '0') while n.length < 5
+  #   n
+  # end
 
   def new_char(msg, shift)
     msg.each_char.with_index do |char, index|
