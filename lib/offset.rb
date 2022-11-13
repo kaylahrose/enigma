@@ -2,7 +2,6 @@ class Offset
   attr_reader :a_offset, :b_offset, :c_offset, :d_offset
 
   def initialize(date)
-    # offset = (date.to_i**2).to_s[-4..-1]
     offset = transform(date)
     @a_offset = offset[0].to_i
     @b_offset = offset[1].to_i
@@ -11,9 +10,6 @@ class Offset
   end
 
   def transform(date)
-    (date.to_i**2).to_s[-4..-1]
-    # require 'pry'; binding.pry
-    
-
+    (date.to_i**2).to_s[-4..]
   end
 end
