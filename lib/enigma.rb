@@ -1,8 +1,5 @@
-require_relative 'key'
-require_relative 'offset'
-require_relative 'shift'
 require_relative 'cipher'
-require 'default'
+require_relative 'default'
 require 'date'
 
 class Enigma
