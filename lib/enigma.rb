@@ -58,11 +58,11 @@ class Enigma
     @d
   end
 
-  def dnew_char(msg, shift)
-    msg.each_char.with_index do |char, index|
-      new_index = characters.index(char) - assoc_shift(index, shift)
-      new_index += 27 while new_index < 0
-      @d[:decryption] << characters[new_index]
-    end
-  end
+  # def dnew_char(msg, shift)
+  #   msg.each_char.with_index do |char, index|
+  #     new_index = characters.index(char) - assoc_shift(index, shift)
+  #     new_index += 27 while new_index < 0
+  #     @d[:decryption] << characters[new_index]
+  #   end
+  # end
 end

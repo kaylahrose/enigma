@@ -20,9 +20,15 @@ module Convert
     end
   end
 
-  def dnew_char(msg, _shift)
-    msg.each_char.with_index do |_char, _index|
-      @d[:decryption] << characters[new_index]
+  def dnew_char(msg, shift)
+    msg.each_char.with_index do |char, index|
+      if characters.index(char).nil?
+        # require 'pry'; binding.pry
+        @d[:decryption] << char
+      else
+        new_index = shift_down(char, index, shift)
+        @d[:decryption] << characters[new_index]
+      end
     end
   end
 
