@@ -16,10 +16,6 @@ class Enigma
     new_msg(msg.downcase)
   end
 
-  def characters
-    ('a'..'z').to_a << ' '
-  end
-
   def assoc_shift(index, shift)
     index -= 4 while index > 3
     if index == 0
