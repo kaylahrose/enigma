@@ -14,4 +14,8 @@ module Default
   def current_date
     Date.today.strftime('%d%m%y')
   end
+
+  def characters
+    ('a'..'z').to_a << ' '
+  end
 end
