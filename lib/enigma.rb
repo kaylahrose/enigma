@@ -22,4 +22,7 @@ class Enigma
               date: date }
     cipher(text)
   end
+
+  def crack
+  end
 end
