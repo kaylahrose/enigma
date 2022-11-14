@@ -15,18 +15,6 @@ RSpec.describe Enigma do
                                      'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' '])
   end
 
-  it '#assoc_shift' do
-    enigma = Enigma.new
-    shift = enigma.make_shifts('02715','040895')
-
-    expect(enigma.assoc_shift(0, shift)).to eq(3)
-    expect(enigma.assoc_shift(1,shift)).to eq(27)
-    expect(enigma.assoc_shift(2,shift)).to eq(73)
-    expect(enigma.assoc_shift(3,shift)).to eq(20)
-    expect(enigma.assoc_shift(4,shift)).to eq(3)
-    expect(enigma.assoc_shift(9,shift)).to eq(27)
-  end
-
   it '#encrypt a message with key and date' do
     enigma = Enigma.new
     expected = {

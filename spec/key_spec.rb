@@ -18,8 +18,6 @@ RSpec.describe Key do
   end
 
   it 'generates random key with leading 0s' do
-    # enigma = Enigma.new
-
     expect(Key.random_key).to be_a(String)
     expect(Key.random_key.length).to eq(5)
     expect((0..99_999).include?(Key.random_key.to_i)).to eq(true)
