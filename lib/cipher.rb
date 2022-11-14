@@ -1,5 +1,16 @@
 module Cipher
-  def cipher(text)
+
+  def characters
+    ('a'..'z').to_a << ' '
+  end
+
+  def make_shifts(key_num, date)
+    key = Key.new(key_num)
+    offset = Offset.new(date)
+    Shift.new(key, offset)
+  end
+
+  def cipher(text, info)
     text.each_char.with_index do |char, index|
       char = update_char(char, index) if characters.index(char)
       @hash[@hash.keys[0]] << char

@@ -1,10 +1,8 @@
 require_relative 'cipher'
-require_relative 'default'
 require 'date'
 
 class Enigma
   include Cipher
-  include Default
 
   def encrypt(text,
               key_num = Key.random_key,
@@ -12,13 +10,13 @@ class Enigma
     @hash = { encryption: '',
               key: key_num,
               date: date }
-    cipher(text.downcase)
+    cipher(text.downcase, @hash)
   end
 
   def decrypt(text, key_num, date = Offset.current_date)
     @hash = { decryption: '',
               key: key_num,
               date: date }
-    cipher(text)
+    cipher(text, @hash)
   end
 end
