@@ -10,13 +10,13 @@ class Enigma
     @hash = { encryption: '',
               key: key_num,
               date: date }
-    cipher(text.downcase, @hash)
+    cipher(text.downcase)
   end
 
   def decrypt(text, key_num, date = Offset.current_date)
     @hash = { decryption: '',
               key: key_num,
               date: date }
-    cipher(text, @hash)
+    cipher(text)
   end
 end

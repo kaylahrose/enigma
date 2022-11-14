@@ -10,7 +10,7 @@ module Cipher
     Shift.new(key, offset)
   end
 
-  def cipher(text, info)
+  def cipher(text)
     text.each_char.with_index do |char, index|
       char = update_char(char, index) if characters.index(char)
       @hash[@hash.keys[0]] << char
