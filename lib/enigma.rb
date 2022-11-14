@@ -22,4 +22,14 @@ class Enigma
               date: date }
     cipher(text)
   end
+
+  def crack(text, date = Offset.current_date)
+    loop do
+      current = decrypt(text, Key.random_key, date)
+      if current[:decryption][-4..] == ' end'
+        return current
+        break
+      end
+    end
+  end
 end

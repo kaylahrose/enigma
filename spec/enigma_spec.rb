@@ -68,14 +68,6 @@ RSpec.describe Enigma do
     expect(no_date[:decryption]).to eq('hello world')
   end
 
-  # it 'generates random key with leading 0s' do
-  #   enigma = Enigma.new
-
-  #   expect(enigma.random_key).to be_a(String)
-  #   expect(enigma.random_key.length).to eq(5)
-  #   expect((0..99_999).include?(enigma.random_key.to_i)).to eq(true)
-  # end
-
   it '#encrypt a message (generates random key and uses todays date)' do
     enigma = Enigma.new
     encrypt_no_key = enigma.encrypt('hello world')
@@ -91,5 +83,27 @@ RSpec.describe Enigma do
     encryption_downcase = enigma.encrypt('hello world', '02715', '040895')
 
     expect(encryption_upcase).to eq(encryption_downcase)
+  end
+  it '#crack and encryption with a date' do
+    enigma = Enigma.new
+    allow(Key).to receive(:random_key).and_return('08304')
+    expect(enigma.crack('vjqtbeaweqihssi', '291018')).to eq(
+      {
+        decryption: 'hello world end',
+        date: '291018',
+        key: '08304'
+      }
+    )
+  end
+
+  it '#crack an encryption (uses todays date)' do
+    enigma = Enigma.new
+    allow(Key).to receive(:random_key).and_return('08304')
+    allow(Offset).to receive(:current_date).and_return('291018')
+    expect(enigma.crack('vjqtbeaweqihssi')).to eq({
+                                                    decryption: 'hello world end',
+                                                    date: '291018',
+                                                    key: '08304'
+                                                  })
   end
 end
