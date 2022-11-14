@@ -23,6 +23,16 @@ class Enigma
     cipher(text)
   end
 
-  def crack
+  def crack(text, date = Offset.current_date)
+    # attempts = []
+    loop do
+      # decrypt(text, Key.random_key, date)
+      current = decrypt(text, Key.random_key, date)
+      # attempts << current[:key]
+      if current[:decryption][-4..] == ' end'
+        return current
+        break
+      end
+    end
   end
 end

@@ -86,8 +86,7 @@ RSpec.describe Enigma do
   end
   it '#crack and encryption with a date' do
     enigma = Enigma.new
-    encryption = enigma.encrypt('hello world end', '08304', '291018')
-
+    allow(Key).to receive(:random_key).and_return('08304')
     expect(enigma.crack('vjqtbeaweqihssi', '291018')).to eq(
       {
         decryption: 'hello world end',
@@ -97,12 +96,14 @@ RSpec.describe Enigma do
     )
   end
 
-  # crack an encryption (uses today's date)
-  # enigma.crack('vjqtbeaweqihssi')
-  #=>
-  #   {
-  #     decryption: "hello world end",
-  #     date: # todays date in the format DDMMYY,
-  #     key: # key used for encryption
-  #   }
+  it '#crack an encryption (uses todays date)' do
+    enigma = Enigma.new
+    allow(Key).to receive(:random_key).and_return('08304')
+    allow(Offset).to receive(:current_date).and_return('291018')
+    expect(enigma.crack('vjqtbeaweqihssi')).to eq({
+                                                    decryption: 'hello world end',
+                                                    date: '291018',
+                                                    key: '08304'
+                                                  })
+  end
 end
