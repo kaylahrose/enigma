@@ -7,4 +7,10 @@ class Key
     @c_key = num[2..3].to_i
     @d_key = num[3..4].to_i
   end
+
+  def self.random_key
+    n = rand(0..99_999).to_s
+    n.insert(0, '0') while n.length < 5
+    n
+  end
 end

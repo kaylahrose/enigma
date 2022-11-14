@@ -12,4 +12,9 @@ class Offset
   def transform(date)
     (date.to_i**2).to_s[-4..]
   end
+
+
+  def self.current_date
+    Date.today.strftime('%d%m%y')
+  end
 end

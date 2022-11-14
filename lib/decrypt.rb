@@ -4,11 +4,12 @@ enigma = Enigma.new
 encryption = File.read(ARGV[0])
 
 # TODO: move to enigma class
-encryption.delete! '\":}{,'
-encryption = Hash[encryption.split.map { |pair| pair.split('=>') }]
-encryption.transform_keys!(&:to_sym)
+# require 'pry'; binding.pry
+# encryption.delete! '\":}{,'
+# encryption = Hash[encryption.split.map { |pair| pair.split('=>') }]
+# encryption.transform_keys!(&:to_sym)
 
-decryption = enigma.decrypt(encryption[:encryption], encryption[:key], encryption[:date])
+decryption = enigma.decrypt(encryption, ARGV[2], ARGV[3])
 file = File.open(ARGV[1], 'w')
 file.write(decryption)
 
