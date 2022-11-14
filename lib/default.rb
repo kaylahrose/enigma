@@ -11,9 +11,9 @@ module Default
     Shift.new(key, offset)
   end
 
-  def current_date
-    Date.today.strftime('%d%m%y')
-  end
+#   def current_date
+#     Date.today.strftime('%d%m%y')
+#   end
 
   def characters
     ('a'..'z').to_a << ' '
