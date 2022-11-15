@@ -7,20 +7,21 @@ require 'date'
 class Enigma
   include Cipher
 
-  def encrypt(text,
-              key_num = Key.random_key,
-              date = Offset.current_date)
-    @hash = { encryption: '',
-              key: key_num,
-              date: date }
-    cipher(text.downcase)
+  def encrypt(text, key_num = Key.random_key, date = Offset.current_date)
+    hash = { encryption: text.downcase.to_s,
+             key: key_num,
+             date: date }
+    shift = Shift.new(Key.new(hash[:key]), Offset.new(hash[:date]))
+
+    cipher(hash, shift)
   end
 
   def decrypt(text, key_num, date = Offset.current_date)
-    @hash = { decryption: '',
-              key: key_num,
-              date: date }
-    cipher(text)
+    hash = { decryption: text,
+             key: key_num,
+             date: date }
+    shift = Shift.new(Key.new(hash[:key], false), Offset.new(hash[:date], false))
+    cipher(hash, shift)
   end
 
   def crack(text, date = Offset.current_date)
