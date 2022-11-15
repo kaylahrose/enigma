@@ -15,6 +15,27 @@ RSpec.describe Enigma do
                                      'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' '])
   end
 
+  it '#update_char changes each character in message' do
+    enigma = Enigma.new
+    expect(enigma.update_char('h', 4)).to eq('l')
+    expect(enigma.update_char('a', -10)).to eq('r')
+  end
+
+  it '#cipher transforms a string' do
+    enigma = Enigma.new
+
+    hash = {
+      encryption: 'hello world?',
+      key: '02715',
+      date: '040895'
+    }
+    shift = double('shift')
+    allow(shift).to receive(:assoc_shift).and_return(1)
+    enigma.cipher(hash,shift)
+
+    expect(hash[:encryption]).to eq('ifmmpaxpsme?')
+  end
+
   it '#encrypt a message with key and date' do
     enigma = Enigma.new
     expected = {
@@ -84,6 +105,7 @@ RSpec.describe Enigma do
 
     expect(encryption_upcase).to eq(encryption_downcase)
   end
+
   it '#crack and encryption with a date' do
     enigma = Enigma.new
     allow(Key).to receive(:random_key).and_return('08304')
