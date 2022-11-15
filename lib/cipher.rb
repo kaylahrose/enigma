@@ -13,7 +13,7 @@ module Cipher
     hash
   end
 
-  def update_char(char,shift)
+  def update_char(char, shift)
     rotated_characters = characters.rotate(shift)
     rotated_characters[characters.index(char)]
   end

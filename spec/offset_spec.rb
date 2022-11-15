@@ -16,4 +16,11 @@ RSpec.describe Offset do
     offset = Offset.new('121122')
     expect(offset.transform('121122')).to eq('8884')
   end
+
+  it '#current_date' do
+  # require 'pry'; binding.pry
+  allow(Offset).to receive(:current_date).and_return(Date.new(1995,8,04).strftime('%d%m%y'))
+  expect(Offset.current_date).to eq('040895')
+
+end
 end
