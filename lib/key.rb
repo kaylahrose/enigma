@@ -10,9 +10,7 @@ class Key
   end
 
   def self.random_key
-    n = rand(0..99_999).to_s
-    n.insert(0, '0') while n.length < 5
-    n
+    '%05d' % rand(10**5)
   end
 
   def make_negative
