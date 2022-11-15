@@ -12,8 +12,7 @@ class Enigma
              key: key_num,
              date: date }
     shift = Shift.new(Key.new(hash[:key]), Offset.new(hash[:date]))
-
-    cipher(hash, shift)
+    update_string(hash, shift)
   end
 
   def decrypt(text, key_num, date = Offset.current_date)
@@ -21,7 +20,7 @@ class Enigma
              key: key_num,
              date: date }
     shift = Shift.new(Key.new(hash[:key], false), Offset.new(hash[:date], false))
-    cipher(hash, shift)
+    update_string(hash, shift)
   end
 
   def crack(text, date = Offset.current_date)
@@ -32,5 +31,11 @@ class Enigma
         break
       end
     end
+  end
+
+  def results(modified)
+    file = File.open(ARGV[1], 'w')
+    file.write(modified[modified.keys[0]])
+    puts "Created '#{ARGV[1]}' with the key #{modified[:key]} and date #{modified[:date]}"
   end
 end

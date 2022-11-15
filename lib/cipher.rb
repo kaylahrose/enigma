@@ -3,7 +3,7 @@ module Cipher
     ('a'..'z').to_a << ' '
   end
 
-  def cipher(hash, shift)
+  def update_string(hash, shift)
     hash[hash.keys[0]].each_char.with_index do |char, index|
       if characters.index(char)
         updated = update_char(char, shift.assoc_shift(index))

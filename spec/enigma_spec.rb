@@ -21,7 +21,7 @@ RSpec.describe Enigma do
     expect(enigma.update_char('a', -10)).to eq('r')
   end
 
-  it '#cipher transforms a string' do
+  it '#update_string transforms a string' do
     enigma = Enigma.new
 
     hash = {
@@ -31,7 +31,7 @@ RSpec.describe Enigma do
     }
     shift = double('shift')
     allow(shift).to receive(:assoc_shift).and_return(1)
-    enigma.cipher(hash,shift)
+    enigma.update_string(hash,shift)
 
     expect(hash[:encryption]).to eq('ifmmpaxpsme?')
   end
